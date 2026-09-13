@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulika Dabral — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F2EA;
+    --paper-alt:#EFEAdd;
+    --ink:#1B2030;
+    --ink-soft:#4A5163;
+    --blue:#2B4FBF;
+    --blue-deep:#1B2E7A;
+    --clay:#C25A2C;
+    --line:#C9C2AE;
+    --grid-line: rgba(27,32,48,0.06);
+    --max: 880px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--clay); color:var(--paper);}
+
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  /* subtle blueprint grid backdrop on hero */
+  .grid-bg{
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,242,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem;
+    letter-spacing:0.01em;
+  }
+  .nav-mark span{color:var(--blue);}
+  nav.links{display:flex; gap:26px; font-size:0.92rem;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); position:relative; padding-bottom:2px;}
+  nav.links a:hover{color:var(--ink);}
+  nav.links a::after{
+    content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px;
+    background:var(--clay); transition:width .25s ease;
+  }
+  nav.links a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 84px;
+    position:relative;
+  }
+  .hero .wrap{position:relative;}
+  .eyebrow-line{
+    display:flex; align-items:center; gap:12px;
+    font-family:'JetBrains Mono', monospace; font-size:0.82rem; color:var(--blue-deep);
+    margin-bottom:26px;
+  }
+  .eyebrow-line::before{
+    content:''; width:34px; height:1px; background:var(--blue-deep);
+  }
+  h1.hero-name{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(2.8rem, 7vw, 5.2rem);
+    line-height:0.98;
+    margin:0 0 22px;
+    letter-spacing:-0.01em;
+  }
+  h1.hero-name em{
+    font-style:italic; font-weight:500; color:var(--blue);
+  }
+  .hero-tagline{
+    max-width:520px;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+    margin:0 0 40px;
+  }
+  .hero-cta{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 26px; font-size:0.95rem; font-weight:500;
+    border-radius:2px; text-decoration:none; cursor:pointer; border:1px solid transparent;
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-primary:hover{background:var(--blue-deep);}
+  .btn-outline{border-color:var(--ink); color:var(--ink); background:transparent;}
+  .btn-outline:hover{background:var(--ink); color:var(--paper);}
+
+  /* section shared */
+  section{padding:78px 0;}
+  .section-alt{background:var(--paper-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:44px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace; color:var(--clay); font-size:0.85rem;
+  }
+  .section-title{
+    font-family:'Fraunces', serif; font-weight:500; font-size:2rem; margin:0;
+  }
+  .section-rule{flex:1; height:1px; background:var(--line);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:220px 1fr; gap:56px; align-items:start;
+  }
+  .about-photo{
+    width:220px; height:220px; border-radius:2px; overflow:hidden;
+    border:1px solid var(--line);
+    background:linear-gradient(135deg,#DCE3F5,#EFEAdd);
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .about-photo svg{width:60%; height:60%; color:var(--blue-deep); opacity:0.55;}
+  .about-photo .tag{
+    position:absolute; bottom:10px; left:10px; right:10px;
+    font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--ink-soft);
+    background:rgba(245,242,234,0.85); padding:4px 6px;
+  }
+  .about-text p{margin:0 0 16px; color:var(--ink-soft); font-size:1.02rem;}
+  .about-text p:first-child{color:var(--ink); font-size:1.08rem;}
+  .about-meta{
+    display:flex; gap:28px; margin-top:26px; flex-wrap:wrap;
+  }
+  .meta-item{font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--ink-soft);}
+  .meta-item strong{display:block; color:var(--ink); font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:600;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:2px;
+    border:1px solid var(--line); background:var(--line);
+  }
+  .skill-block{
+    background:var(--paper); padding:26px 24px;
+  }
+  .skill-block h3{
+    margin:0 0 12px; font-family:'Fraunces', serif; font-weight:500; font-size:1.15rem;
+  }
+  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-tags span{
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    padding:5px 9px; border:1px solid var(--line); color:var(--ink-soft);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-list{display:flex; flex-direction:column;}
+  .project-row{
+    display:grid; grid-template-columns:1fr 1.15fr; gap:40px;
+    padding:40px 0; border-top:1px solid var(--line); align-items:center;
+  }
+  .project-row:last-child{border-bottom:1px solid var(--line);}
+  .project-thumb{
+    aspect-ratio:4/3; background:linear-gradient(135deg,#E4E9F7,#EFEAdd);
+    border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+  }
+  .project-thumb svg{width:34%; color:var(--blue); opacity:0.5;}
+  .project-index{font-family:'JetBrains Mono', monospace; color:var(--clay); font-size:0.8rem; margin-bottom:8px; display:block;}
+  .project-title{font-family:'Fraunces', serif; font-weight:500; font-size:1.5rem; margin:0 0 10px;}
+  .project-desc{color:var(--ink-soft); margin:0 0 16px; font-size:0.98rem;}
+  .project-stack{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .project-stack span{
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--blue-deep);
+    border:1px solid var(--blue-deep); padding:3px 8px; opacity:0.85;
+  }
+  .project-link{
+    font-size:0.9rem; text-decoration:none; color:var(--ink); font-weight:500;
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+  }
+  .project-link:hover{color:var(--blue); border-color:var(--blue);}
+
+  /* ---------- RESUME ---------- */
+  .resume-panel{
+    display:flex; align-items:center; justify-content:space-between; gap:30px;
+    flex-wrap:wrap;
+    border:1px solid var(--ink); padding:44px 40px;
+    background:var(--paper);
+  }
+  .resume-panel h3{
+    font-family:'Fraunces', serif; font-weight:500; font-size:1.6rem; margin:0 0 8px;
+  }
+  .resume-panel p{margin:0; color:var(--ink-soft); max-width:380px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:50px;
+  }
+  .contact-lead p{color:var(--ink-soft); font-size:1.05rem; max-width:420px;}
+  .contact-lead h2{
+    font-family:'Fraunces', serif; font-weight:500; font-size:2.2rem; margin:0 0 18px;
+  }
+  .contact-list{list-style:none; margin:0; padding:0;}
+  .contact-list li{
+    display:flex; justify-content:space-between; padding:18px 0; border-top:1px solid var(--line);
+  }
+  .contact-list li:last-child{border-bottom:1px solid var(--line);}
+
+  /* ---------- EXPERIENCE / ACHIEVEMENTS ---------- */
+  .exp-item{border:1px solid var(--line); padding:28px 30px; background:var(--paper);}
+  .exp-top{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;}
+  .exp-top h3{font-family:'Fraunces', serif; font-weight:500; font-size:1.25rem; margin:0;}
+  .exp-date{font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--clay);}
+  .exp-org{color:var(--ink-soft); margin:6px 0 16px; font-size:0.95rem;}
+  .achieve-list{list-style:none; margin:0; padding:0;}
+  .achieve-list li{
+    position:relative; padding:14px 0 14px 24px; border-top:1px solid var(--line);
+    color:var(--ink-soft); font-size:0.95rem;
+  }
+  .achieve-list li:last-child{border-bottom:1px solid var(--line);}
+  .achieve-list li::before{
+    content:'—'; position:absolute; left:0; color:var(--clay); font-family:'JetBrains Mono', monospace;
+  }
+  .contact-label{font-family:'JetBrains Mono', monospace; font-size:0.78rem; color:var(--ink-soft);}
+  .contact-value{font-weight:500;}
+  .contact-value a{text-decoration:none;}
+  .contact-value a:hover{color:var(--blue);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:34px 0; border-top:1px solid var(--line);
+  }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    font-size:0.85rem; color:var(--ink-soft);
+  }
+  .footer-links{display:flex; gap:18px;}
+  .footer-links a{text-decoration:none; color:var(--ink-soft);}
+  .footer-links a:hover{color:var(--ink);}
+
+  @media (max-width:720px){
+    nav.links{position:fixed; top:64px; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:20px 28px; border-bottom:1px solid var(--line);
+      display:none; gap:14px;}
+    nav.links.open{display:flex;}
+    .nav-toggle{display:block;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{width:150px; height:150px;}
+    .project-row{grid-template-columns:1fr;}
+    .project-thumb{order:-1;}
+    .contact-grid{grid-template-columns:1fr;}
+    .resume-panel{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-mark">Tulika <span>Dabral</span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero grid-bg">
+  <div class="wrap">
+    <div class="eyebrow-line">CS engineering student / based in Dehradun, India</div>
+    <h1 class="hero-name">I build systems<br>that <em>make sense</em>.</h1>
+    <p class="hero-tagline">I'm Tulika — a final-year Computer Science Engineering student building full-stack applications with React, Node.js, and Express, with hands-on experience applying deep learning and explainable AI to real-world problems.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View projects</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        <div class="tag">/ photo placeholder</div>
+      </div>
+      <div class="about-text">
+        <p>I'm a final-year B.Tech Computer Science & Engineering student at Graphic Era Hill University, Dehradun, with hands-on full-stack development experience in React, Node.js, and Express.js, backed by strong foundations in Data Structures, Algorithms, DBMS/SQL, and Operating Systems.</p>
+        <p>I'm an AWS Certified Cloud Practitioner with practical experience applying deep learning and explainable AI to real-world problems — from building compilers for custom data-processing languages to detecting web vulnerabilities with multithreaded scanning engines.</p>
+        <p>I'm currently looking for a Software Engineering internship where I can help build scalable, real-world applications.</p>
+        <div class="about-meta">
+          <div class="meta-item"><strong>8.31 CGPA</strong>Graphic Era Hill University</div>
+          <div class="meta-item"><strong>2027</strong>expected graduation</div>
+          <div class="meta-item"><strong>AWS Certified</strong>Cloud Practitioner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span>C</span><span>C++</span><span>Python</span><span>JavaScript</span><span>Java</span><span>HTML</span><span>CSS</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Frameworks &amp; Libraries</h3>
+        <div class="skill-tags">
+          <span>Next.js</span><span>React</span><span>Node.js</span><span>Express.js</span><span>Socket.IO</span><span>PyTorch</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Databases &amp; Tools</h3>
+        <div class="skill-tags">
+          <span>SQL</span><span>DBMS</span><span>PostgreSQL</span><span>Docker</span><span>Git</span><span>GitHub</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>Cloud &amp; AI</h3>
+        <div class="skill-tags">
+          <span>AWS</span><span>Machine Learning</span><span>Deep Learning</span><span>Computer Vision</span><span>Generative AI</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <h3>CS Fundamentals</h3>
+        <div class="skill-tags">
+          <span>Data Structures &amp; Algorithms</span><span>DBMS</span><span>Operating Systems</span><span>OOPs</span><span>Cybersecurity</span><span>Network Security</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-top">
+        <h3>Image Processing &amp; Computer Vision Intern</h3>
+        <span class="exp-date">Jun 2026 — Jul 2026</span>
+      </div>
+      <div class="exp-org">Graphic Era Deemed University (GEU), Dehradun</div>
+      <div class="project-stack">
+        <span>Python</span><span>PyTorch</span><span>EfficientNet-B3</span><span>ResNet-50</span><span>ViT</span><span>Grad-CAM</span><span>LIME</span><span>SHAP</span>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:56px;">
+      <span class="section-num">＋</span>
+      <h2 class="section-title" style="font-size:1.4rem;">Certifications &amp; Achievements</h2>
+      <div class="section-rule"></div>
+    </div>
+    <ul class="achieve-list">
+      <li>Research paper accepted — Explainable AI-based skin disease diagnosis using EfficientNet-B3, ResNet50, and Vision Transformer with Grad-CAM, LIME, and SHAP.</li>
+      <li>AWS Certified Cloud Practitioner.</li>
+      <li>Hack-a-Holic 4.0 Hackathon participant.</li>
+      <li>Machine Learning certification — supervised learning, unsupervised learning, and model training foundations.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="projects-list">
+
+      <div class="project-row">
+        <div>
+          <span class="project-index">Project 01 · 2026</span>
+          <h3 class="project-title">DataScript Compiler</h3>
+          <p class="project-desc">A compiler-based data-processing system with a custom Domain Specific Language, letting users upload a CSV and run transformations without writing code. Built a lexer, parser, and executor to tokenize, validate, and run DSL commands for filtering, renaming, sorting, and column deletion, with a Flask + Pandas backend and an HTML/CSS/JS frontend.</p>
+          <div class="project-stack"><span>Python</span><span>Flask</span><span>Pandas</span><span>HTML/CSS/JS</span></div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div>
+          <span class="project-index">Project 02 · 2025</span>
+          <h3 class="project-title">Interactive Travel & Tourism Guide</h3>
+          <p class="project-desc">A desktop travel-planning app for Dehradun tourism using a custom Binary Search Tree for rating-based place lookup and an A* search algorithm for shortest-path route optimization. An interactive Folium map renders optimized routes with markers, distance, and cost breakdowns, alongside modules for weather forecasting, parking-availability prediction, and multilingual voice translation.</p>
+          <div class="project-stack"><span>Python</span><span>Custom Tkinter</span><span>Folium</span></div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 19V6a2 2 0 012-2h9l5 5v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 4v5h5"/></svg>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div>
+          <span class="project-index">Project 03 · 2025</span>
+          <h3 class="project-title">Ethical Hacking & Vulnerability Assessment Tool</h3>
+          <p class="project-desc">A web penetration-testing tool that detects critical vulnerabilities including SQL Injection, Cross-Site Scripting, and directory brute-force attacks. A multithreaded scanning engine built on Java Executor Service cuts scan time significantly versus single-threaded alternatives, with a Swing GUI and automated HTML report generation for non-technical stakeholders.</p>
+          <div class="project-stack"><span>Java SE</span><span>Java Swing</span><span>Executor Service</span></div>
+        </div>
+        <div class="project-thumb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="resume" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Resume</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="resume-panel">
+      <div>
+        <h3>Want the full history?</h3>
+        <p>Download a PDF copy of my resume — education, experience, projects, and certifications.</p>
+      </div>
+      <a href="assets/Tulika_Dabral_Resume.pdf" download class="btn btn-primary">Download PDF</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-lead">
+        <h2>Let's work<br>together.</h2>
+        <p>I'm currently looking for a Software Engineering internship. The fastest way to reach me is email.</p>
+      </div>
+      <ul class="contact-list">
+        <li><span class="contact-label">EMAIL</span><span class="contact-value"><a href="mailto:tulikadabral26@gmail.com">tulikadabral26@gmail.com</a></span></li>
+        <li><span class="contact-label">PHONE</span><span class="contact-value"><a href="tel:+917900357014">+91 7900357014</a></span></li>
+        <li><span class="contact-label">LOCATION</span><span class="contact-value">Dehradun, Uttarakhand</span></li>
+        <li><span class="contact-label">GITHUB</span><span class="contact-value"><a href="https://github.com/TulikaDabral" target="_blank" rel="noopener">github.com/TulikaDabral</a></span></li>
+        <li><span class="contact-label">LINKEDIN</span><span class="contact-value"><a href="http://www.linkedin.com/in/tulika-dabral" target="_blank" rel="noopener">linkedin.com/in/tulika-dabral</a></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 Tulika Dabral. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+
+</body>
+</html>
